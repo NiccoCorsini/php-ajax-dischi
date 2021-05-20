@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dischi Vue</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.common.dev.min.js"
+      integrity="sha512-PkyFg1MEb/EwsFAqzqvZqWdMT4ItV+E1NgOtfBC9X8UecJcO9bwirD+v/9tJwci4wTNHdNYBk4ev6ceb1hy73g=="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <img class="img" src="./img/logo.png" alt="logo" />
+        <div class="search"></div>
+      </header>
+      <div class="container">
+        <div
+          v-for="(disc, index) in albums"
+          :key="disc.title + index"
+          class="card"
+        >
+          <img :src="disc.poster" :alt="disc.title" />
+          <div class="details">
+            <h3>{{disc.title}}</h3>
+            <h5>{{disc.author}}</h5>
+            <h4>{{disc.year}}</h4>
+            <h5>{{disc.genre}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
