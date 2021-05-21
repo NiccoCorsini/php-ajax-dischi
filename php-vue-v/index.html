@@ -17,20 +17,45 @@
     <div id="app">
       <header>
         <img class="img" src="./img/logo.png" alt="logo" />
-        <div class="search"></div>
+        <div class="search">
+          <input
+            v-model.trim="query"
+            type="text"
+            placeholder="Search"
+            @keyup="search"
+          />
+
+          <div class="select">
+            <select @change="select" v-model="value">
+              <option value="all">All</option>
+              <option v-for="genre in genres" :value="genre">{{genre}}</option>
+            </select>
+          </div>
+        </div>
       </header>
-      <div class="container">
-        <div
-          v-for="(disc, index) in albums"
-          :key="disc.title + index"
-          class="card"
-        >
-          <img :src="disc.poster" :alt="disc.title" />
-          <div class="details">
-            <h3>{{disc.title}}</h3>
-            <h5>{{disc.author}}</h5>
-            <h4>{{disc.year}}</h4>
-            <h5>{{disc.genre}}</h5>
+      <div v-if="!loading" class="spinner">
+        <h2>Loading...</h2>
+        <div class="bar">
+          <div class="loading"></div>
+        </div>
+      </div>
+      <div v-else class="macrosearch">
+        <div v-if="albums.length === 0" class="container-empty">
+          <h2>La tua ricerca non ha prodotto risultati...</h2>
+        </div>
+        <div v-else class="container">
+          <div
+            v-for="(disc, index) in albums"
+            :key="disc.title + index"
+            class="card"
+          >
+            <img :src="disc.poster" :alt="disc.title" />
+            <div class="details">
+              <h3>{{disc.title}}</h3>
+              <h5>{{disc.author}}</h5>
+              <h4>{{disc.year}}</h4>
+              <h5>{{disc.genre}}</h5>
+            </div>
           </div>
         </div>
       </div>

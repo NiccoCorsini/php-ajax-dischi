@@ -2,19 +2,54 @@ const app = new Vue({
   el: "#app",
   data: {
     albums: [],
+    genres: [],
+    loading: false,
+    query: "",
+    value: "all",
   },
   created() {
-    const APIurl = `${window.location.href}database.php`;
+    this.search();
+  },
+  methods: {
+    search() {
+      const APIurl = `${window.location.href}scripts/search.php`;
 
-    axios
-      .get(APIurl)
+      axios
+        .get(APIurl, {
+          params: {
+            query: this.searchCriteria(),
+          },
+        })
 
-      .then((result) => {
-        this.albums = result.data;
-      })
+        .then((result) => {
+          this.albums = result.data;
 
-      .catch((err) => {
-        console.log(err);
-      });
+          setTimeout(() => {
+            this.loading = true;
+          }, 2000);
+
+          result.data.forEach((disc) => {
+            if (!this.genres.includes(disc.genre)) {
+              this.genres.push(disc.genre);
+            }
+          });
+        })
+
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    select() {
+      this.search();
+    },
+    searchCriteria() {
+      if (this.value == "all") {
+        return this.query.toLowerCase();
+      } else if (this.query != "") {
+        this.value = "all";
+      } else {
+        return this.value.toLowerCase();
+      }
+    },
   },
 });

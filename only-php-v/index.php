@@ -5,7 +5,7 @@
 // -   Attraverso l’utilizzo di Axios: al caricamento della pagina axios chiederà attraverso una chiamata API i dischi a php e li stamperà attraverso vue.
 // Utilizzare: Html, JS, Vue e Axios (CDN), Php
 // Nella repo potete creare due cartelle: una per la versione solo PHP e una per la versione AJAX. Avremo sia oggi che domani per lavorarci.
-require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/dati/database.php';
 
 ?>
 <!DOCTYPE html>
