@@ -14,6 +14,8 @@ const app = new Vue({
     search() {
       const APIurl = `${window.location.href}scripts/search.php`;
 
+      // const APIurl = "http://192.168.1.102/database.php"; test su altro sever
+
       axios
         .get(APIurl, {
           params: {

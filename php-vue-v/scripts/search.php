@@ -13,10 +13,14 @@ $db_final = $database;
             
             foreach ($database as $value){
                 if ( strpos(strtolower($value['title']), $query) !== false || strpos(strtolower($value['author']), $query) !== false ){
-                    array_push($db_final, $value);
+                    if (! in_array($value, $db_final)){
+                        array_push($db_final, $value);
+                    }
                 } 
                 elseif ( strtolower($value['genre']) == $query ) {
-                    array_push($db_final, $value);
+                    if (! in_array($value, $db_final)){
+                        array_push($db_final, $value);
+                    }
                 }
             }
         }
